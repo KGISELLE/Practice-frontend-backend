@@ -37,12 +37,15 @@ const Login = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ...loginData,
-        balance: Number(loginData.balance),
-      }), 
+      body: JSON.stringify(loginData), 
     })
-      .then((response) => response.json()) // Interpretar la respuesta como JSON
+      .then((response) => {
+        if(response.ok) {
+          return response.json()
+        } else {
+          throw new Error("Error en la solicitud de login");
+        }
+      })
       .then((data) => {
         console.log("Respuesta de la API:", data);
       })
@@ -55,12 +58,12 @@ const Login = () => {
     <>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label>User name:</label>
+        <label>Username:</label>
         <input
           type="text"
-          id="name"
-          name="name"
-          value={loginData.name}
+          id="username"
+          name="username"
+          value={loginData.username}
           onChange={handleChange}
         />
         <label htmlFor="password">Password:</label>
