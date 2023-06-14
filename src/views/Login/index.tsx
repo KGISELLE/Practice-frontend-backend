@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 interface LoginData {
   name: string;
@@ -16,8 +17,16 @@ const Login = () => {
     name: "",
     username: "",
     password: "",
-    balance: 0, //
+    balance: 0,
   });
+
+  //Guardar el login
+  // const [loggedIn, setLoggedIn] = useState(false);
+
+  //Guardar el valor del Id para pasarlo a user
+  const [catchID, setCatchID] = useState("");
+
+  const navigate = useNavigate();
 
   const handleChange = (event: any) => {
     setLoginData({
@@ -48,17 +57,31 @@ const Login = () => {
       })
       .then((data) => {
         console.log("Respuesta de la API:", data);
+
+        const userID = data.id;
+        console.log(userID)
+
+        setCatchID(userID);
+        
+        //Marcar el estado como autenticado
+        // setLoggedIn(true)
+        navigate("/user")
       })
       .catch((error) => {
         console.error("Error al llamar a la API:", error);
       });
-  }
+  };
+
+  // if(loggedIn) {
+  //   navigate("/user")
+  // }
+  
 
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexFlow: "column" }}>
+        <label style={{ margin: "10px" }}>Username:</label>
         <input
           type="text"
           id="username"
@@ -66,7 +89,7 @@ const Login = () => {
           value={loginData.username}
           onChange={handleChange}
         />
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" style={{ margin: "10px" }}>Password:</label>
         <input
           type="password"
           id="password"
@@ -74,13 +97,21 @@ const Login = () => {
           value={loginData.password}
           onChange={handleChange}
         />
-        <button type="submit">Login</button>
+        <button 
+          type="submit"
+          style={{ backgroundColor: "#646CFF", color: "white", margin: "10px" }}
+        >
+          Login
+        </button>
       </form>
 
       <p>Haven't you registered yet?</p>
       <p>
         Go to <Link to="/register"> Register</Link>
       </p>
+      <p>id user es {catchID}</p>
+
+      
     </>
   );
 };

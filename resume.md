@@ -31,4 +31,30 @@ const handleChange = (event: any) => {
     });
   };
 
+useNavigate
+https://bobbyhadz.com/blog/react-export-usehistory-was-not-found-in-react-router-dom
 
+
+//   Realizar la llamada al API
+//   fetch("http://localhost:4000/user/:id", {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json", // Tipo de contenido que se enviará en el body
+//     },
+//   })
+//     .then((response) => {
+//       if(response.ok) {
+//         return response.json() // Interpretar la respuesta como JSON
+//       } else {
+//         throw new Error("Error en el registro");
+//       }
+//     })
+//     .then((data) => {
+//       console.log("Respuesta de la API:", data);
+//       const { name, balance } = data;
+//       console.log("Name: ", name );
+//       console.log("Balance: ", balance);
+//     })
+//     .catch((error) => {
+//       console.error("Error al llamar a la API:", error);
+//     });

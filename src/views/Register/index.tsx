@@ -10,12 +10,15 @@ interface RegisterData {
 }
 
 const Register = () => {
+
   const [registerData, setRegisterData] = useState<RegisterData>({
     name: "",
     username: "",
     password: "",
     balance: 0,
   });
+
+  const [redirectToLogin, setRedirectToLogin] = useState(false)
 
   const handleChange = (event: any) => {
     setRegisterData({
@@ -40,7 +43,14 @@ const Register = () => {
         balance: Number(registerData.balance),
       }), // Conviete el objeto registerData a un JSON
     })
-      .then((response) => response.json()) // Interpretar la respuesta como JSON
+      .then((response) => {
+        if(response.ok) {
+          setRedirectToLogin(true);
+          return response.json() // Interpretar la respuesta como JSON
+        } else {
+          throw new Error("Error en el registro");
+        }
+      })
       .then((data) => {
         console.log("Respuesta de la API:", data);
       })
@@ -49,10 +59,14 @@ const Register = () => {
       });
   };
 
+  if (redirectToLogin) {
+    return <Link to="/login">successful registration go to login</Link>; // Redireccionar a la vista de login
+  }
+
   return (
     <>
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexFlow: "column" }}>
         <label htmlFor="user" style={{ margin: "10px" }}>
           User:
         </label>
@@ -94,8 +108,8 @@ const Register = () => {
           onChange={handleChange}
         />
         <button
-          type="submit"
           style={{ backgroundColor: "#646CFF", color: "white", margin: "10px" }}
+          type="submit"
         >
           Register
         </button>
