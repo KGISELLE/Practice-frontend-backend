@@ -4,7 +4,7 @@ import './App.css'
 
 import Login from "./views/Login";
 import Register from "./views/Register";
-import User from "./Services/User"
+// import Home from "./Views/Home"
 
 function App() {
   
@@ -13,7 +13,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/user" element={< User />} />
+      {/* <Route path="/user" element={< Home />} /> */}
       <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
   )

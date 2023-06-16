@@ -2,11 +2,13 @@ import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
+import user from "../../Services/user.ts";
+
 interface RegisterData {
-  name: string; //
+  name: string; 
   username: string;
   password: string;
-  balance: number; //
+  balance: number;
 }
 
 const Register = () => {
@@ -18,7 +20,8 @@ const Register = () => {
     balance: 0,
   });
 
-  const [redirectToLogin, setRedirectToLogin] = useState(false)
+  
+  const userMethods = user();
 
   const handleChange = (event: any) => {
     setRegisterData({
@@ -32,36 +35,9 @@ const Register = () => {
 
     console.log(registerData);
 
-    // Realizar la llamada al API
-    fetch("http://localhost:4000/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // Tipo de contenido que se enviará en el body
-      },
-      body: JSON.stringify({
-        ...registerData,
-        balance: Number(registerData.balance),
-      }), // Conviete el objeto registerData a un JSON
-    })
-      .then((response) => {
-        if(response.ok) {
-          setRedirectToLogin(true);
-          return response.json() // Interpretar la respuesta como JSON
-        } else {
-          throw new Error("Error en el registro");
-        }
-      })
-      .then((data) => {
-        console.log("Respuesta de la API:", data);
-      })
-      .catch((error) => {
-        console.error("Error al llamar a la API:", error);
-      });
-  };
+    userMethods.register(registerData)
 
-  if (redirectToLogin) {
-    return <Link to="/login">successful registration go to login</Link>; // Redireccionar a la vista de login
-  }
+  };
 
   return (
     <>

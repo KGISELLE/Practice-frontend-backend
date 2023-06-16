@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+import user from "../../Services/user.ts";
 
 interface LoginData {
   name: string;
@@ -20,13 +21,7 @@ const Login = () => {
     balance: 0,
   });
 
-  //Guardar el login
-  // const [loggedIn, setLoggedIn] = useState(false);
-
-  //Guardar el valor del Id para pasarlo a user
-  const [catchID, setCatchID] = useState("");
-
-  const navigate = useNavigate();
+  const userMethods = user();
 
   const handleChange = (event: any) => {
     setLoginData({
@@ -40,41 +35,9 @@ const Login = () => {
 
     console.log(loginData, "loginData");
 
-    // Realizar la llamada al API //EL FETCH DEBE HACERSE DENTRO EL SERVICIO DE USUARIOS
-    fetch("http://localhost:4000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData), 
-    })
-      .then((response) => {
-        if(response.ok) {
-          return response.json()
-        } else {
-          throw new Error("Error en la solicitud de login");
-        }
-      })
-      .then((data) => {
-        console.log("Respuesta de la API:", data);
+    userMethods.login(loginData)
 
-        const userID = data.id;
-        console.log(userID)
-
-        setCatchID(userID);
-        
-        //Marcar el estado como autenticado
-        // setLoggedIn(true)
-        navigate("/user")
-      })
-      .catch((error) => {
-        console.error("Error al llamar a la API:", error);
-      });
   };
-
-  // if(loggedIn) {
-  //   navigate("/user")
-  // }
   
 
   return (
@@ -109,8 +72,6 @@ const Login = () => {
       <p>
         Go to <Link to="/register"> Register</Link>
       </p>
-      <p>id user es {catchID}</p>
-
       
     </>
   );
