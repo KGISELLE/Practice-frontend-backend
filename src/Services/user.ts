@@ -60,7 +60,7 @@ const user = (): UserMethods => {
         const userID = data.id;
         console.log(userID)
         
-        // navigate("/home")
+        navigate("/home")
         return data
       })
       .catch((error) => {

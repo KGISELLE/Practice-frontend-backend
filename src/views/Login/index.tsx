@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 
 import user from "../../Services/user.ts";
 
+import Form from "../../components/Form";
+
 interface LoginData {
   name: string;
   username: string;
   password: string;
   balance: number;
 }
+
+
 
 
 const Login = () => {
@@ -43,30 +47,8 @@ const Login = () => {
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexFlow: "column" }}>
-        <label style={{ margin: "10px" }}>Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={loginData.username}
-          onChange={handleChange}
-        />
-        <label htmlFor="password" style={{ margin: "10px" }}>Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={loginData.password}
-          onChange={handleChange}
-        />
-        <button 
-          type="submit"
-          style={{ backgroundColor: "#646CFF", color: "white", margin: "10px" }}
-        >
-          Login
-        </button>
-      </form>
+
+      <Form onSubmit={handleSubmit} onChange={handleChange} formType="login" />
 
       <p>Haven't you registered yet?</p>
       <p>

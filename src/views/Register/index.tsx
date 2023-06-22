@@ -1,8 +1,10 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import user from "../../Services/user.ts";
+
+import Form from "../../components/Form";
 
 interface RegisterData {
   name: string; 
@@ -42,54 +44,8 @@ const Register = () => {
   return (
     <>
       <h1>Register</h1>
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexFlow: "column" }}>
-        <label htmlFor="user" style={{ margin: "10px" }}>
-          User:
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={registerData.name}
-          onChange={handleChange}
-        />
-        <label htmlFor="username" style={{ margin: "10px" }}>
-          User Name:
-        </label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={registerData.username}
-          onChange={handleChange}
-        />
-        <label htmlFor="password" style={{ margin: "10px" }}>
-          Password:
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={registerData.password}
-          onChange={handleChange}
-        />
-        <label htmlFor="balance" style={{ margin: "10px" }}>
-          Balance:
-        </label>
-        <input
-          type="number"
-          id="balance"
-          name="balance"
-          value={registerData.balance}
-          onChange={handleChange}
-        />
-        <button
-          style={{ backgroundColor: "#646CFF", color: "white", margin: "10px" }}
-          type="submit"
-        >
-          Register
-        </button>
-      </form>
+
+      <Form onSubmit={handleSubmit} onChange={handleChange} formType="register" />
 
       <p>Already registered?</p>
       <p>
