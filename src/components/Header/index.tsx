@@ -1,8 +1,14 @@
+interface HeaderProps {
+    username: string;
+}
 
 
-const Header = () => {
+
+const Header = ({ username }: HeaderProps) => {
     return (
-        <h1>Header</h1>
+        <header>
+            <h1>Welcome {username}</h1>
+        </header>
     )
 }
 

@@ -1,12 +1,15 @@
+import Button from "../Button";
 import Input from "../Input";
 
 interface FormProps {
   onSubmit: (event: any) => void;
   onChange: (event: any) => void;
   formType: "login" | "register";
+  buttonText: string;
 }
 
-const Form = ({ onSubmit, onChange, formType }: FormProps) => {
+
+const Form = ({ onSubmit, onChange, formType, buttonText }: FormProps) => {
   return (
     <form onSubmit={onSubmit} style={{ display: "flex", flexFlow: "column" }}>
       {formType === "login" && (
@@ -24,16 +27,7 @@ const Form = ({ onSubmit, onChange, formType }: FormProps) => {
             onChange={onChange}
           />
 
-          <button
-            style={{
-              backgroundColor: "#646CFF",
-              color: "white",
-              margin: "20px",
-            }}
-            type="submit"
-          >
-            Login
-          </button>
+          <Button color="primary" buttonText={buttonText} ></Button>
         </>
       )}
       {formType === "register" && (
@@ -63,7 +57,9 @@ const Form = ({ onSubmit, onChange, formType }: FormProps) => {
             onChange={onChange}
           />
 
-          <button
+          <Button color="primary" buttonText={buttonText} ></Button>
+
+          {/* <button
             style={{
               backgroundColor: "#646CFF",
               color: "white",
@@ -72,7 +68,7 @@ const Form = ({ onSubmit, onChange, formType }: FormProps) => {
             type="submit"
           >
             Register
-          </button>
+          </button> */}
         </>
       )}
     </form>
