@@ -45,7 +45,7 @@ const Register = () => {
     <>
       <h1>Register</h1>
 
-      <Form onSubmit={handleSubmit} onChange={handleChange} formType="register" />
+      <Form onSubmit={handleSubmit} onChange={handleChange} formType="register" buttonText="Register" />
 
       <p>Already registered?</p>
       <p>

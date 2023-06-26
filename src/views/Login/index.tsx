@@ -14,8 +14,6 @@ interface LoginData {
 }
 
 
-
-
 const Login = () => {
 
   const [loginData, setLoginData] = useState<LoginData>({
@@ -48,7 +46,7 @@ const Login = () => {
     <>
       <h1>Login</h1>
 
-      <Form onSubmit={handleSubmit} onChange={handleChange} formType="login" />
+      <Form onSubmit={handleSubmit} onChange={handleChange} formType="login" buttonText="Login" />
 
       <p>Haven't you registered yet?</p>
       <p>
