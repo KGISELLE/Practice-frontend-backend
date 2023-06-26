@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 interface UserMethods {
   register(userData: any): void;
-  login(userData: any): void;
+  login(userData: any): any;
 }
 
 const user = (): UserMethods => {
@@ -40,7 +40,8 @@ const user = (): UserMethods => {
 
   //?Login Method - API Call
   const login = (userData: any) => {
-    fetch("http://localhost:4000/login", {
+
+      fetch("http://localhost:4000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -57,15 +58,22 @@ const user = (): UserMethods => {
       .then((data) => {
         console.log("Respuesta de la API:", data);
 
-        const userID = data.id;
-        console.log(userID)
+
+        const { id, username, balance } = data;
+        console.log(id, username, balance)
+
+        // const userID = data.id;
+        // console.log(userID)
+
+        localStorage.setItem("userID", id); // Almacena el ID del usuario en el almacenamiento local
         
         navigate("/home")
-        return data
+        return ({id, username, balance})
       })
       .catch((error) => {
         console.error("Error al llamar a la API:", error);
       });
+    
   };
 
   return {

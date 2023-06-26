@@ -344,3 +344,90 @@ export default Login;
 
 
 
+
+const transactions = (): Promise<any> => {
+
+    const url = `http://localhost:4000/user/:id`
+
+
+
+    return new Promise<any>((resolve, reject) => {
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+            }
+        })
+            // .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Error en la solicitud");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Datos de transacciones:", data);
+                resolve(data.username);
+                return data;
+            })
+            // .then((data) => {
+            //   console.log("Datos recibidos:", data);
+            //   // Aquí puedes realizar acciones adicionales con los datos recibidos
+            // })
+            .catch((error) => {
+                console.error("Error:", error);
+                // Aquí puedes manejar el error en caso de que la solicitud falle
+                //   return Promise.reject(error);
+                reject(error);
+            });
+    })
+  
+};
+
+export default transactions;
+
+
+
+
+
+
+
+
+
+
+
+home
+// getUserData(userID)
+    //     .then(console.log("userID****", userID))
+    //     .then((userData: UserData) => { 
+    //       console.log("userdta dentro de useeffect", userData)
+    //       setGetData(userData)
+    //     })
+    //     .catch((error: any) => {
+    //       console.error('Error al obtener los datos del usuario:', error);
+    //     });
+
+    
+    // if (userID) {
+    //   getUserData(userID)
+    //     .then(console.log("userID****", userID))
+    //     .then((userData: UserData) => { 
+    //       console.log("userdta dentro de useeffect", userData)
+    //       setGetData(userData)
+    //     })
+    //     .catch((error: any) => {
+    //       console.error('Error al obtener los datos del usuario:', error);
+    //     });
+    // }
+
+de esta forma funciona el Home*****
+
+      // fetch(`http://localhost:4000/user/${userID}`)
+      //   .then((response) => response.json())
+      //   .then((userData) => {
+      //     console.log(userData)
+      //     setGetData(userData);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error al obtener los datos del usuario:", error);
+      //   });
