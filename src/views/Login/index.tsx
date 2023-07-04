@@ -1,26 +1,20 @@
 import { useState } from "react";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import user from "../../Services/user.ts";
 
 import Form from "../../components/Form";
 
 interface LoginData {
-  name: string;
   username: string;
   password: string;
-  balance: number;
 }
 
-
 const Login = () => {
-
   const [loginData, setLoginData] = useState<LoginData>({
-    name: "",
     username: "",
     password: "",
-    balance: 0,
   });
 
   const userMethods = user();
@@ -30,29 +24,36 @@ const Login = () => {
       ...loginData,
       [event.target.name]: event.target.value,
     });
-  }
+  };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
     console.log(loginData, "loginData");
 
-    userMethods.login(loginData)
-
+    userMethods.login(loginData);
   };
-  
+
+  const formFields = [
+    { name: "username", label: "User Name:", type: "text" },
+    { name: "password", label: "Password:", type: "password" },
+  ];
 
   return (
     <>
       <h1>Login</h1>
 
-      <Form onSubmit={handleSubmit} onChange={handleChange} formType="login" buttonText="Login" />
+      <Form
+        fields={formFields}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        buttonText="Login"
+      />
 
       <p>Haven't you registered yet?</p>
       <p>
         Go to <Link to="/register"> Register</Link>
       </p>
-      
     </>
   );
 };
