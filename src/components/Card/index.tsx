@@ -12,6 +12,7 @@ const Card = ({ cardTitle, balance }: CardProps) => {
             backgroundColor: "#646CFF",
             color: "white",
             padding: "10px",
+            boxSizing: "border-box",
             width: "100%",
             justifyContent: "space-between",
             borderBottomColor: "#f1f1f1",
