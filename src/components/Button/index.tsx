@@ -1,24 +1,33 @@
 interface ButtonProps {
-    color: "primary" | "secondary";
-    buttonText: string;
+  variant: "primary" | "income" | "withdraw";
+  buttonText: string;
+  onClick?: (event: any) => void;
 }
 
-const Button = ({ color, buttonText }: ButtonProps) => {
+const Button = ({ variant, buttonText }: ButtonProps) => {
 
-    const buttonColor = color === "primary" ? "#646CFF" : "red"
+  let buttonColor: string;
 
-    return (
-        <button
-            style={{
-                backgroundColor: buttonColor, 
-                color: "white",
-                margin: "20px"
-            }}
-        >
-            {buttonText}
-        </button>
-    );
-}
+  if (variant === "primary") {
+    buttonColor = "#646CFF";
+  } else if (variant === "income") {
+    buttonColor = "green";
+  } else {
+    buttonColor = "red";
+  }
+
+  return (
+    <button
+      style={{
+        backgroundColor: buttonColor,
+        color: "white",
+        margin: "50px 20px 50px 20px",
+        padding: "10px",
+      }}
+    >
+      {buttonText}
+    </button>
+  );
+};
 
 export default Button;
-

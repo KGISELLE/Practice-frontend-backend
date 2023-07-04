@@ -2,75 +2,26 @@ import Button from "../Button";
 import Input from "../Input";
 
 interface FormProps {
+  fields: Array<{ name: string; label: string; type: string }>;
   onSubmit: (event: any) => void;
   onChange: (event: any) => void;
-  formType: "login" | "register";
   buttonText: string;
 }
 
-
-const Form = ({ onSubmit, onChange, formType, buttonText }: FormProps) => {
+const Form = ({ fields, onSubmit, onChange, buttonText }: FormProps) => {
   return (
-    <form onSubmit={onSubmit} style={{ display: "flex", flexFlow: "column" }}>
-      {formType === "login" && (
-        <>
-          <Input
-            name="username"
-            label="User Name:"
-            inputType="text"
-            onChange={onChange}
-          />
-          <Input
-            name="password"
-            label="Password:"
-            inputType="password"
-            onChange={onChange}
-          />
+    <form onSubmit={onSubmit} style={{ display: "flex", flexFlow: "column"}}>
+      {fields.map((field) => (
+        <Input
+          key={field.name}
+          name={field.name}
+          label={field.label}
+          inputType={field.type}
+          onChange={onChange}
+        />
+      ))}
 
-          <Button color="primary" buttonText={buttonText} ></Button>
-        </>
-      )}
-      {formType === "register" && (
-        <>
-          <Input
-            name="name"
-            label="Name:"
-            inputType="text"
-            onChange={onChange}
-          />
-          <Input
-            name="username"
-            label="User Name:"
-            inputType="text"
-            onChange={onChange}
-          />
-          <Input
-            name="password"
-            label="Password:"
-            inputType="password"
-            onChange={onChange}
-          />
-          <Input
-            name="balance"
-            label="Balance:"
-            inputType="number"
-            onChange={onChange}
-          />
-
-          <Button color="primary" buttonText={buttonText} ></Button>
-
-          {/* <button
-            style={{
-              backgroundColor: "#646CFF",
-              color: "white",
-              margin: "20px",
-            }}
-            type="submit"
-          >
-            Register
-          </button> */}
-        </>
-      )}
+      <Button variant="primary" buttonText={buttonText}></Button>
     </form>
   );
 };
